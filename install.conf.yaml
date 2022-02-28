@@ -1,3 +1,16 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- clean:
+    ~/:
+      force: true
+    ~/.config:
+      recursive: true
+    ~/.ssh:
+      recursive: true
+
 - template:
     - ~/.gitconfig:
         source_file: templates/gitconfig
@@ -15,5 +28,5 @@
               Linux: "!/home/dryam/miniconda3/bin/gh auth git-credential"
 
 - snap:
-    - firefox
     - shellcheck
+    - shfmt

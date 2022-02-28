@@ -1,20 +1,20 @@
 [core]
-  excludesfile = /home/dryam/.global_gitignore
+  excludesfile = {{HOME_DIR}}/.global_gitignore
 
 [user]
-  name = Vyacheslav Dryamov
-  email = dryamov.dev@gmail.com
-  signingkey = None
+  name = {{NAME}}
+  email = {{EMAIL}}
+  signingkey = {{SIGNING_KEY}}
 
 [sendmail]
-  smtpserver = 
-  smtpserverport = 
-  smtpencryption = 
-  smtpuser = dryamov.dev@gmail.com
-  from = dryamov.dev@gmail.com
+  smtpserver = {{SMTP_SERVER}}
+  smtpserverport = {{SMTP_PORT}}
+  smtpencryption = {{SMTP_ENCRYPTION}}
+  smtpuser = {{EMAIL}}
+  from = {{EMAIL}}
 
 [github]
-  user = dryamov
+  user = {{GITHUB_USERNAME}}
 
 [credential]
-  helper = 
+  helper = {{CREDENTIAL_HELPER}}

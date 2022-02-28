@@ -4,8 +4,15 @@
         params:
           NAME: Vyacheslav Dryamov
           EMAIL: dryamov.dev@gmail.com
-          GITHUB_USERNAME: dryamov
+          GITHUB: dryamov
           SIGNING_KEY:
+          SMTP_SERVER: smtp.gmail.com
+          SMTP_PORT: 587
+          SMTP_ENCRYPTION: tls
+          __UNAME__:
+            CREDENTIAL_HELPER:
+              Darwin: osxkeychain
+              Linux: "!/home/dryam/miniconda3/bin/gh auth git-credential"
 
 - snap:
     - firefox

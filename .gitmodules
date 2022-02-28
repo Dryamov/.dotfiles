@@ -2,3 +2,9 @@
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot
 	ignore = dirty
+[submodule "plugins/dotbot-template"]
+	path = plugins/dotbot-template
+	url = https://github.com/ssbanerje/dotbot-template.git
+[submodule "plugins/dotbot-snap"]
+	path = plugins/dotbot-snap
+	url = https://github.com/DrDynamic/dotbot-snap.git

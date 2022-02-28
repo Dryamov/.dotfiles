@@ -11,6 +11,13 @@
     ~/.ssh:
       recursive: true
 
+- create:
+    - ~/Downloads
+    - ~/Repositories
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
+
 - template:
     - ~/.gitconfig:
         source_file: templates/gitconfig

@@ -1,0 +1,12 @@
+- template:
+    - ~/.gitconfig:
+        source_file: templates/gitconfig
+        params:
+          NAME: Vyacheslav Dryamov
+          EMAIL: dryamov.dev@gmail.com
+          GITHUB_USERNAME: dryamov
+          SIGNING_KEY:
+
+- snap:
+    - firefox
+    - shellcheck

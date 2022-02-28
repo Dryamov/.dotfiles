@@ -3,22 +3,26 @@
 set -e
 set -u
 set -o pipefail
+set -x
 
+BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-CONFIG="install.conf.yaml"
-DOTBOT_DIR="dotbot"
+DOTBOT_DIR="meta/dotbot"
 PLUGINS_DIR="plugins"
 
+CONFIG="install.conf.yaml"
+
+
 DOTBOT_BIN="bin/dotbot"
-BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 
 cd "${BASEDIR}"
 
 printf "%s %s\\n" "Submodules: sync" "${DOTBOT_DIR}"
-git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive || printf "%s %s\\n" "Submodules: failed sync" "${DOTBOT_DIR}"
+git submodule sync --quiet --recursive || printf "%s %s\\n" "Submodules: failed sync" "${DOTBOT_DIR}"
 
-printf "%s %s\\n" "Submodules: update" "${DOTBOT_DIR}"
-git submodule update --init --quiet  --recursive "${DOTBOT_DIR}" || printf "%s %s\\n" "Submodules: failed update" "${DOTBOT_DIR}"
+# printf "%s %s\\n" "Submodules: update" "${DOTBOT_DIR}"
+# git submodule update --init --quiet  --recursive "${DOTBOT_DIR}" || printf "%s %s\\n" "Submodules: failed update" "${DOTBOT_DIR}"
 
 printf "%s %s\\n" "Submodules: update" "${BASEDIR}"
 git submodule update --quiet  --init "${BASEDIR}" || printf "%s %s\\n" "Submodules: failed update" "${BASEDIR}"

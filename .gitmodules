@@ -1,17 +1,17 @@
-[submodule "meta/dotbot"]
+[submodule "dotbot"]
 	path = meta/dotbot
 	url = https://github.com/anishathalye/dotbot
 	active = true
 	ignore = dirty
 
-[submodule "plugins/dotbot-template"]
-	path = plugins/dotbot-template
+[submodule "dotbot-template"]
+	path = meta/plugins/dotbot-template
 	url = https://github.com/ssbanerje/dotbot-template.git
 	active = true
 	ignore = dirty
 
-[submodule "plugins/dotbot-snap"]
-	path = plugins/dotbot-snap
+[submodule "dotbot-snap"]
+	path = meta/plugins/dotbot-snap
 	url = https://github.com/DrDynamic/dotbot-snap.git
 	active = true
 	ignore = dirty

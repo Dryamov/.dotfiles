@@ -15,9 +15,6 @@
     - ~/Downloads
     - ~/Repositories
 
-- shell:
-  - [git submodule update --init --recursive, Installing submodules]
-
 - template:
     - ~/.gitconfig:
         source_file: templates/gitconfig
@@ -34,6 +31,6 @@
               Darwin: osxkeychain
               Linux: "!/home/dryam/miniconda3/bin/gh auth git-credential"
 
-- snap:
-    - shellcheck
-    - shfmt
+#- snap:
+#    - shellcheck
+#    - shfmt

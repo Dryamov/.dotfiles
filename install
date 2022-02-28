@@ -1,16 +1,27 @@
 #!/usr/bin/env bash
 
 set -e
+set -u
+set -o pipefail
+
 
 CONFIG="install.conf.yaml"
 DOTBOT_DIR="dotbot"
+PLUGINS_DIR="plugins"
 
 DOTBOT_BIN="bin/dotbot"
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 cd "${BASEDIR}"
-git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
-git submodule update --init --recursive "${DOTBOT_DIR}"
+
+printf "%s %s\\n" "Submodules: sync" "${DOTBOT_DIR}"
+git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive || printf "%s %s\\n" "Submodules: failed sync" "${DOTBOT_DIR}"
+
+printf "%s %s\\n" "Submodules: update" "${DOTBOT_DIR}"
+git submodule update --init --recursive "${DOTBOT_DIR}" || printf "%s %s\\n" "Submodules: failed update" "${DOTBOT_DIR}"
+
+printf "%s %s\\n" "Submodules: update" "${BASEDIR}"
+git submodule update --init "${BASEDIR}" || printf "%s %s\\n" "Submodules: failed update" "${BASEDIR}"
 
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}"  \
   --plugin-dir plugins/dotbot-snap \

@@ -1,12 +1,23 @@
 - link:
     ~/.zshrc: shells/zsh/zshrc
     ~/.zsh_aliases: shells/zsh/aliases
-    ~/.oh-my-zsh: shells/zsh/oh-my-zsh
 
-- shell:
-  -
-    command: sudo chsh -s $(which zsh)
-    stdin: true
-    stdout: true
-    description: Making zsh the default shell
-    quiet: false
+- git:
+    '~/.oh-my-zsh':
+        url: 'https://github.com/ohmyzsh/ohmyzsh'
+        description: 'oh my zsh - core'
+    '~/.oh-my-zsh/custom/plugins/zsh-autosuggestions':
+        url: 'https://github.com/zsh-users/zsh-autosuggestions'
+        description: 'oh my zsh - autosuggestions'
+    '~/.oh-my-zsh/custom/themes/powerlevel10k':
+        url: 'https://github.com/romkatv/powerlevel10k.git'
+        description: 'oh my zsh - powerlevel10k'
+    '~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting':
+        url: 'https://github.com/zsh-users/zsh-syntax-highlighting'
+        description: 'oh my zsh - zsh syntax highlighting'
+    '~/.oh-my-zsh/custom/plugins/zsh-history-substring-search':
+        url: 'https://github.com/zsh-users/zsh-history-substring-search'
+        description: 'oh my zsh - history substring search'
+    '~/.oh-my-zsh/custom/plugins/zsh-completions':
+        url: 'https://github.com/zsh-users/zsh-completions'
+        description: 'oh my zsh - completions'

@@ -2,3 +2,11 @@
     ~/.zshrc: shells/zsh/zshrc
     ~/.zsh_aliases: shells/zsh/aliases
     ~/.oh-my-zsh: shells/zsh/oh-my-zsh
+
+- shell:
+  -
+    command: sudo chsh -s $(which zsh)
+    stdin: true
+    stdout: true
+    description: Making zsh the default shell
+    quiet: false

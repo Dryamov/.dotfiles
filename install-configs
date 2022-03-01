@@ -36,7 +36,6 @@ for config in ${CONFIGS}; do
 	configContent="$(<"${BASE_DIR}/${META_DIR}/${BASE_CONFIG}${CONFIG_SUFFIX}")\n$(<"${BASE_DIR}/${META_DIR}/${CONFIG_DIR}/${config}${CONFIG_SUFFIX}")"
 	"${BASE_DIR}/${META_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" \
 		--plugin-dir "${META_DIR}"/"${PLUGINS_DIR}"/dotbot-snap \
-		--plugin-dir "${META_DIR}"/"${PLUGINS_DIR}"/dotbot-template \
 		-d "${BASE_DIR}" \
 		-c <(echo -e "${configContent}")
 done

@@ -3,3 +3,4 @@
     ~/.bash_aliases: shells/bash/aliases
     ~/.bash_logout:  shells/bash/logout
     ~/.bash_profile: shells/bash/profile
+    ~/.oh-my-bash: shells/bash/oh-my-bash

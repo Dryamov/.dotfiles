@@ -13,3 +13,9 @@
 	url = https://github.com/ssbanerje/dotbot-template.git
 	active = true
 	ignore = dirty
+[submodule "shells/bash/oh-my-bash"]
+	path = shells/bash/oh-my-bash
+	url = https://github.com/ohmybash/oh-my-bash.git
+[submodule "shells/zsh/oh-my-zsh"]
+	path = shells/zsh/oh-my-zsh
+	url = https://github.com/ohmyzsh/ohmyzsh.git

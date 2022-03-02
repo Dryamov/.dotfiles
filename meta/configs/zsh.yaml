@@ -1,6 +1,6 @@
 - link:
-    ~/.zshrc: shells/zsh/zshrc
-    ~/.zsh_aliases: shells/zsh/aliases
+    ~/.zshrc:       zsh/zshrc
+    ~/.zsh_aliases: zsh/aliases
 
 - git:
     '~/.oh-my-zsh':

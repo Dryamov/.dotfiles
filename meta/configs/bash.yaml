@@ -1,10 +1,10 @@
 - link:
-    ~/.bashrc: shells/bash/bashrc
-    ~/.bash_aliases: shells/bash/aliases
-    ~/.bash_logout:  shells/bash/logout
-    ~/.bash_profile: shells/bash/profile
+      ~/.bashrc:        bash/bashrc
+      ~/.bash_aliases:  bash/aliases
+      ~/.bash_logout:   bash/logout
+      ~/.bash_profile:  bash/profile
 
 - git:
-    '~/.oh-my-bash':
-        url: 'https://github.com/ohmybash/oh-my-bash'
-        description: 'oh my bash - core'
+      "~/.oh-my-bash":
+          url: "https://github.com/ohmybash/oh-my-bash"
+          description: "oh my bash - core"

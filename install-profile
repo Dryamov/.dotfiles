@@ -13,29 +13,41 @@ set -o pipefail
 
 BASE_CONFIG="base"
 CONFIG_SUFFIX=".yaml"
-
 META_DIR="meta"
 CONFIG_DIR="configs"
-
+PROFILES_DIR="profiles"
+PLUGINS_DIR="plugins"
 DOTBOT_DIR="dotbot"
 DOTBOT_BIN="bin/dotbot"
 
 BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-PLUGINS_DIR="plugins"
+PROFILE=("${@:? Missing profile name}")
 
 DOTBOT_BIN="bin/dotbot"
 
 cd "${BASE_DIR}"
-git submodule update --init --recursive
+git submodule update --init --recursive || exit 1
 
-CONFIGS=$(echo "${@}" | sed -r ':a; s/\b([[:alnum:]]+)\b(.*)\b\1\b/\1\2/g; ta; s/(, )+/, /g; s/, *$//')
+for _profile in "${PROFILE[@]}"; do
+	if [[ ! -f ${META_DIR}/${PROFILES_DIR}/${_profile} ]]; then
+		printf '%s %s\n' "No such profile:" "${_profile}"
+		exit 100
+	else
+		while IFS= read -r config; do
+			CONFIGS+=" ${config}"
+		done <"${META_DIR}/${PROFILES_DIR}/${_profile}"
+	fi
+
+done
+
+CONFIGS=$(echo "${CONFIGS}" | sed -r ':a; s/\b([[:alnum:]]+)\b(.*)\b\1\b/\1\2/g; ta; s/(, )+/, /g; s/, *$//')
 
 for config in ${CONFIGS}; do
-	[[ -f ${BASE_DIR}/${META_DIR}/${CONFIG_DIR}/${config}${CONFIG_SUFFIX} ]] || echo
+	echo -e "\nConfigure ${config}"
 	configContent="$(<"${BASE_DIR}/${META_DIR}/${BASE_CONFIG}${CONFIG_SUFFIX}")\n$(<"${BASE_DIR}/${META_DIR}/${CONFIG_DIR}/${config}${CONFIG_SUFFIX}")"
 	"${BASE_DIR}/${META_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" \
-		--plugin-dir "${META_DIR}"/"${PLUGINS_DIR}"/dotbot-snap \
+		-p "${META_DIR}"/"${PLUGINS_DIR}"/dotbot-snap \
 		-p "${META_DIR}"/"${PLUGINS_DIR}"/dotbot-git/git.py \
 		-d "${BASE_DIR}" \
 		-c <(echo -e "${configContent}")

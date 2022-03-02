@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+catch() {
+	echo "Error $1 occurred in line $2"
+	return "$1"
+}
+
+trap 'catch $? $LINENO' ERR
+
+set -e
+set -u
+set -o pipefail
+
+BASE_CONFIG="base"
+CONFIG_SUFFIX=".yaml"
+
+META_DIR="meta"
+CONFIG_DIR="configs"
+
+DOTBOT_DIR="dotbot"
+DOTBOT_BIN="bin/dotbot"
+
+BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+PLUGINS_DIR="plugins"
+
+DOTBOT_BIN="bin/dotbot"
+
+cd "${BASE_DIR}"
+git submodule update --init
+
+CONFIGS=$(echo "${@}" | sed -r ':a; s/\b([[:alnum:]]+)\b(.*)\b\1\b/\1\2/g; ta; s/(, )+/, /g; s/, *$//')
+
+for config in ${CONFIGS}; do
+	[[ -f ${BASE_DIR}/${META_DIR}/${CONFIG_DIR}/${config}${CONFIG_SUFFIX} ]] || echo
+	configContent="$(<"${BASE_DIR}/${META_DIR}/${BASE_CONFIG}${CONFIG_SUFFIX}")\n$(<"${BASE_DIR}/${META_DIR}/${CONFIG_DIR}/${config}${CONFIG_SUFFIX}")"
+	"${BASE_DIR}/${META_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" \
+		--plugin-dir "${META_DIR}"/"${PLUGINS_DIR}"/dotbot-snap \
+		-p "${META_DIR}"/"${PLUGINS_DIR}"/dotbot-git/git.py \
+		-d "${BASE_DIR}" \
+		-c <(echo -e "${configContent}")
+done

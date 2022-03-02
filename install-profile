@@ -27,7 +27,8 @@ PROFILE=("${@:? Missing profile name}")
 DOTBOT_BIN="bin/dotbot"
 
 cd "${BASE_DIR}"
-git submodule update --init --recursive || exit 1
+git -C "${META_DIR}/${DOTBOT_DIR}" submodule sync --quiet --recursive
+git submodule update --init --recursive "${META_DIR}/${DOTBOT_DIR}"
 
 for _profile in "${PROFILE[@]}"; do
 	if [[ ! -f ${META_DIR}/${PROFILES_DIR}/${_profile} ]]; then
@@ -43,11 +44,15 @@ done
 
 CONFIGS=$(echo "${CONFIGS}" | sed -r ':a; s/\b([[:alnum:]]+)\b(.*)\b\1\b/\1\2/g; ta; s/(, )+/, /g; s/, *$//')
 
+"${BASE_DIR}/${META_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" \
+	-d "${BASE_DIR}" \
+	-c "${BASE_DIR}/${META_DIR}/${CONFIG_DIR}/${BASE_CONFIG}${CONFIG_SUFFIX}"
+
 for config in ${CONFIGS}; do
-	echo -e "\nConfigure ${config}"
-	configContent="$(<"${BASE_DIR}/${META_DIR}/${BASE_CONFIG}${CONFIG_SUFFIX}")\n$(<"${BASE_DIR}/${META_DIR}/${CONFIG_DIR}/${config}${CONFIG_SUFFIX}")"
+	printf "%s" "%s\\n" "Configure" "${config}"
+	configContent="$(<"${BASE_DIR}/${META_DIR}/${CONFIG_DIR}/${config}${CONFIG_SUFFIX}")"
 	"${BASE_DIR}/${META_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" \
-		-p "${META_DIR}"/"${PLUGINS_DIR}"/dotbot-snap \
+		-p "${META_DIR}"/"${PLUGINS_DIR}"/dotbot-snap/snap.py \
 		-p "${META_DIR}"/"${PLUGINS_DIR}"/dotbot-git/git.py \
 		-d "${BASE_DIR}" \
 		-c <(echo -e "${configContent}")

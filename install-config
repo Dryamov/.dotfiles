@@ -32,7 +32,6 @@ cd "${BASE_DIR}"
 git -C "${META_DIR}/${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${META_DIR}/${DOTBOT_DIR}"
 
-
 "${BASE_DIR}/${META_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" \
 	-d "${BASE_DIR}" \
 	-c "${BASE_DIR}/${META_DIR}/${CONFIG_DIR}/${BASE_CONFIG}${CONFIG_SUFFIX}"
@@ -43,6 +42,16 @@ for config in "${@}"; do
 	"${BASE_DIR}/${META_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" \
 		-p "${META_DIR}"/"${PLUGINS_DIR}"/dotbot-snap/snap.py \
 		-p "${META_DIR}"/"${PLUGINS_DIR}"/dotbot-git/git.py \
+		-p "${META_DIR}"/"${PLUGINS_DIR}"/dotbot-sudo/sudo.py \
+		-p "${META_DIR}"/"${PLUGINS_DIR}"/dotbot-apt/apt.py \
+		-p "${META_DIR}"/"${PLUGINS_DIR}"/dotbot-pip/pip.py \
 		-d "${BASE_DIR}" \
 		-c <(echo -e "${configContent}")
 done
+
+cd "${BASE_DIR}"
+
+printf "%s\\n" "Restart your terminal..."
+
+# configContent="$(<"${BASE_DIR}/${META_DIR}/${BASE_CONFIG}${CONFIG_SUFFIX}")\n$(<"${BASE_DIR}/${META_DIR}/${CONFIG_DIR}/${config}${CONFIG_SUFFIX}")"
+#     "${BASE_DIR}/${META_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}"  --plugin-dir plugins/dotbot-snap --plugin-dir plugins/dotbot-template -d "${BASE_DIR}" -c <(echo -e "$configContent")

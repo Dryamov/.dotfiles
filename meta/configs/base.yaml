@@ -1,10 +1,17 @@
 - defaults:
     link:
-      create: true
-      relink: true
+        relink: true
+        create: true
+        force: true
+    shell:
+        stdout: true
+        stderr: true
+
+- create:
+    - $HOME/.config
 
 - clean:
-    ~/:
-      force: true
-    ~/.config:
-      recursive: true
+    $HOME:
+        force: true
+    $HOME/.config:
+        recursive: true

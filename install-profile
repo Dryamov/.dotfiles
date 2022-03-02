@@ -54,6 +54,13 @@ for config in ${CONFIGS}; do
 	"${BASE_DIR}/${META_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" \
 		-p "${META_DIR}"/"${PLUGINS_DIR}"/dotbot-snap/snap.py \
 		-p "${META_DIR}"/"${PLUGINS_DIR}"/dotbot-git/git.py \
+		-p "${META_DIR}"/"${PLUGINS_DIR}"/dotbot-sudo/sudo.py \
+		-p "${META_DIR}"/"${PLUGINS_DIR}"/dotbot-apt/apt.py \
+		-p "${META_DIR}"/"${PLUGINS_DIR}"/dotbot-pip/pip.py \
 		-d "${BASE_DIR}" \
 		-c <(echo -e "${configContent}")
 done
+
+cd "${BASE_DIR}"
+
+printf "%s\\n" "Restart your terminal..."

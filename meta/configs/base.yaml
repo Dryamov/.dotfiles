@@ -3,15 +3,21 @@
         relink: true
         create: true
         force: true
+        ignore-missing: true
     shell:
         stdout: true
         stderr: true
 
-- create:
-    - $HOME/.config
+- shell:
+    - [curl -fsSLO https://raw.githubusercontent.com/Vaelatern/init-dotfiles/master/init_dotfiles.sh && chmod +x ./init_dotfiles.sh]
+    - [./init_dotfiles.sh]
+    - [git submodule update --init --recursive, Installing submodules]
 
 - clean:
     $HOME:
         force: true
     $HOME/.config:
         recursive: true
+
+- create:
+    - $HOME/.config
